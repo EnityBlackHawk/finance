@@ -1,8 +1,0 @@
-{
-    "/api/*":{
-        "target": "https://demo-1679408973898.azurewebsites.net",
-        "segure": false,
-        "loglevel": "debug",
-        "changeOrigin": true
-    }
-}
