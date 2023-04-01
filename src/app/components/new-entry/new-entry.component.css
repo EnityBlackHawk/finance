@@ -1,0 +1,21 @@
+form
+{
+    position: relative;
+    background-color: rgba(0, 0, 0, 1);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 10px;
+    row-gap: 5px;
+}
+
+label{
+    color: white;
+    grid-column: 1;
+    font-size: 2ch;
+}
+
+input[type="submit"]
+{
+    grid-column: 1;
+    grid-column-end: 3;
+}

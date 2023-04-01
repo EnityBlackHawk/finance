@@ -1,0 +1,14 @@
+
+    <form [formGroup]="entryForm" (ngSubmit)="OnSubmit()">
+        <label>Data: </label>
+        <input type="date" formControlName="date" userValueAsDate>
+        <label>Valor: </label>
+        <input type="number" formControlName="value">
+        <label>Descrição: </label>
+        <input type="text" formControlName="description">
+        <label>Credito: </label>
+        <input type="checkbox" formControlName="credit">
+        <input type="submit" value="Adicionar">
+    </form>
+
+
