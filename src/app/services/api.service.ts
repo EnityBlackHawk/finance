@@ -11,7 +11,7 @@ import { Response } from '../Models/Response';
 })
 export class ApiService {
 
-  private readonly apiURL = "api/finance";
+  private readonly apiURL = "https://demo-1679408973898.azurewebsites.net/api/finance";
   private http;
 
   constructor(http: HttpClient) 
