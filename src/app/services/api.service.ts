@@ -5,17 +5,15 @@ import { Page } from '../Models/Page';
 import {User} from '../Models/User';
 import { Entry } from '../Models/Entry';
 import { Response } from '../Models/Response';
+import {enviroment} from '../../'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-<<<<<<< HEAD
 
-=======
   // https://demo-1679408973898.azurewebsites.net
->>>>>>> ecf19a343432cf1c08dfb305d3cb523acb7450a0
-  private readonly apiURL = "https://demo-1679408973898.azurewebsites.net/api/finance";
+  private readonly apiURL =  "https://demo-1679408973898.azurewebsites.net/api/finance";
   private http;
 
   constructor(http: HttpClient) 
