@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, RepeatConfig } from 'rxjs';
 import { Page } from '../Models/Page';
 import {User} from '../Models/User';
 import { Entry } from '../Models/Entry';
@@ -10,8 +10,8 @@ import { Response } from '../Models/Response';
   providedIn: 'root'
 })
 export class ApiService {
-
-  private readonly apiURL = "api/finance";
+  // https://demo-1679408973898.azurewebsites.net
+  private readonly apiURL = "https://demo-1679408973898.azurewebsites.net/api/finance";
   private http;
 
   constructor(http: HttpClient) 
@@ -19,19 +19,24 @@ export class ApiService {
     this.http = http;
   }
 
-  getAllUsers(): Observable<Page<User>>
+  getStatus(): Observable<Response<String>>
+  {
+    return this.http.get<Response<String>>(this.apiURL);
+  }
+
+  private getAllUsers(): Observable<Page<User>>
   {
     return this.http.get<Page<User>>(this.apiURL + "/users/getAll");
   }
 
-  getEntries(userId: String): Observable<Page<Entry>>
+  getEntries(userId: String): Observable<Response<Page<Entry>>>
   {
-    return this.http.get<Page<Entry>>(this.apiURL + "/entry/getByUser/" + userId);
+    return this.http.get<Response<Page<Entry>>>(this.apiURL + "/entry/getByUser/" + userId);
   }
 
-  getUser(id: string): Observable<Page<User>>
+  getUser(id: string): Observable<Response<Page<User>>>
   {
-    return this.http.get<Page<User>>(this.apiURL + "/users/getById/" + id);
+    return this.http.get<Response<Page<User>>>(this.apiURL + "/users/getById/" + id);
   }
 
   autenticate(obj: any): Observable<Response<String>>
@@ -39,12 +44,16 @@ export class ApiService {
     return this.http.post<Response<String>>(this.apiURL + "/users/doLogin", obj);
   }
 
-  save(obj: any, userId: string): Observable<Entry>
+  save(obj: any, userId: string): Observable<Response<Entry>>
   {
     console.log(this.apiURL + "/entry/add/" + userId);
-    return this.http.post<Entry>(this.apiURL + "/entry/add/" + userId, obj);
+    return this.http.post<Response<Entry>>(this.apiURL + "/entry/add/" + userId, obj);
   }
 
-
+  deleteEntry(entryId: String, userToken: String): Observable<Response<User>>
+  {
+    let r = new Response<String>(entryId, 0, "");
+    return this.http.post<Response<User>>(this.apiURL + "/entry/remove/" + userToken, r);
+  }
 
 }

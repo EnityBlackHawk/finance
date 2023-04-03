@@ -6,6 +6,7 @@ form
     grid-template-columns: 1fr 2fr;
     padding: 10px;
     row-gap: 5px;
+    column-gap: 5px;
 }
 
 label{
@@ -14,7 +15,8 @@ label{
     font-size: 2ch;
 }
 
-input[type="submit"]
+input[type="submit"],
+input[type="button"]
 {
     grid-column: 1;
     grid-column-end: 3;

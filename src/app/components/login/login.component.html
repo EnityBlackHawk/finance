@@ -1,10 +1,16 @@
 
 <div class="container">
-    <form [formGroup]="loginForm" (ngSubmit)="OnSubmit()">
-        <h1>Login</h1>
-        <input [ngClass]="{'error': badCredentials}" type="text" placeholder="Username" formControlName="username">
-        <input type="password" placeholder="Password" formControlName="password">
-        <input type="submit" value="Logar">
-    </form>
+    <div class="divForm">
+        <h1 *ngIf="isLoading" class="loadingText">Carregando</h1>
+        <form *ngIf="!isLoading" [formGroup]="loginForm" (ngSubmit)="OnSubmit()">
+            <h1>Login</h1>
+            <input [ngClass]="{'error': badCredentials}" type="text" placeholder="Username" formControlName="username">
+            <input [ngClass]="{'error': badCredentials}" type="password" placeholder="Password" formControlName="password">
+            <input type="submit" value="Logar">
+            <label *ngIf="badCredentials">Credenciais invalidas</label>
+        </form>
+    </div>
+    
+    <p>Api status: {{ apiStatus || "Not connected"}}</p>
 </div>
 
