@@ -68,5 +68,9 @@ export class NewEntryComponent {
     this.OnEmmit(this.entryForm.value);
   }
 
+  public Cancelar(): void
+  {
+    this.OnEmmit(null);
+  }
 
 }

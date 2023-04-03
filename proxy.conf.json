@@ -1,8 +1,7 @@
 {
     "/api/*":{
-        "target": "https://demo-1679408973898.azurewebsites.net",
-        "segure": false,
-        "loglevel": "debug",
-        "changeOrigin": true
+        "target": "https://demo-1679408973898.azurewebsites.net/api",
+        "changeOrigin": true,
+        "pathRewrite": {"^/api": ""}
     }
 }

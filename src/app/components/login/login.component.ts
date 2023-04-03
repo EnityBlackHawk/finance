@@ -13,6 +13,8 @@ export class LoginComponent {
 
   loginForm!: FormGroup;
   badCredentials : boolean = false;
+  apiStatus !: String;
+  isLoading: boolean = false;
 
   constructor(private router: Router, private api: ApiService, private loginService: LoginServiceService)
   {
@@ -26,24 +28,29 @@ export class LoginComponent {
 
   ngOnInit()
   {
+    this.api.getStatus().subscribe(r =>
+      {
+        this.apiStatus = r.report ? r.data : r.message;
+      })
   }
 
   public OnSubmit(): void
   {
+    this.isLoading = true;
     this.api.autenticate(this.loginForm.value).subscribe(o => 
       {
-        console.log(o.data);
-        if(o.data !== undefined)
+        if(o.report === 0)
         {
           this.loginService.userId = o.data.toString();
           this.router.navigate(['main']);
         }
         else
         {
+          console.log(o.message);
           this.badCredentials = true;
+          this.isLoading = false;
         }
       });
-    
 
   }
 }
