@@ -1,0 +1,28 @@
+@media (max-width: 568px)
+{
+    .counteiner
+    {
+        width: 100%;
+        margin: 0;
+    }
+
+    th {
+        border: none;
+        padding: 8px;
+    }
+
+    header h1
+    {
+        font-size: 5vw;
+    }
+
+    header h2
+    {
+        font-size: 5vw;
+    }
+
+    table
+    {
+        font-size: 2vw;
+    }
+}

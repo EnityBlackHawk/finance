@@ -35,7 +35,6 @@ header h2 {
 
 table {
     width: 100%;
-    border: 1px solid black;
     border-collapse: collapse;
 }
 
@@ -95,5 +94,4 @@ button label
     font-size: 5ch;
     text-align: center;
     height: 3ch;
-    
 }
