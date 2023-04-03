@@ -5,7 +5,7 @@ import { Page } from '../Models/Page';
 import {User} from '../Models/User';
 import { Entry } from '../Models/Entry';
 import { Response } from '../Models/Response';
-import {enviroment} from '../../'
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,10 @@ import {enviroment} from '../../'
 export class ApiService {
 
   // https://demo-1679408973898.azurewebsites.net
-  private readonly apiURL =  "https://demo-1679408973898.azurewebsites.net/api/finance";
+  private readonly apiURL = 
+    environment.production ?
+     "https://demo-1679408973898.azurewebsites.net/api/finance" :
+     "/api/finance";
   private http;
 
   constructor(http: HttpClient) 

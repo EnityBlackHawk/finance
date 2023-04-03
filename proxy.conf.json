@@ -1,7 +1,6 @@
 {
     "/api/*":{
-        "target": "https://demo-1679408973898.azurewebsites.net/api",
-        "changeOrigin": true,
-        "pathRewrite": {"^/api": ""}
+        "target": "http://localhost:8080",
+        "changeOrigin": true
     }
 }
