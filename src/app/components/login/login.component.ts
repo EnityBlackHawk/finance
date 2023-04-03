@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { LoginServiceService } from 'src/app/services/login-service.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,7 @@ export class LoginComponent {
 
   ngOnInit()
   {
+    console.log("IsProduction: ", environment.production);
     this.api.getStatus().subscribe(r =>
       {
         this.apiStatus = r.report ? r.data : r.message;
