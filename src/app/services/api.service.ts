@@ -5,7 +5,7 @@ import { Page } from '../Models/Page';
 import {User} from '../Models/User';
 import { Entry } from '../Models/Entry';
 import { Response } from '../Models/Response';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ import { environment } from 'src/environments/environment.development';
 export class ApiService {
 
   // https://demo-1679408973898.azurewebsites.net
-  private readonly apiURL = 
-    environment.production ?
+  private apiURL = 
+  environment.production ?
      "https://demo-1679408973898.azurewebsites.net/api/finance" :
      "/api/finance";
   private http;
@@ -22,6 +22,8 @@ export class ApiService {
   constructor(http: HttpClient) 
   { 
     this.http = http;
+    console.log("IsProduction: ", environment.production);
+    console.log(this.apiURL);
   }
 
   getStatus(): Observable<Response<String>>
@@ -60,5 +62,4 @@ export class ApiService {
     let r = new Response<String>(entryId, 0, "");
     return this.http.post<Response<User>>(this.apiURL + "/entry/remove/" + userToken, r);
   }
-
 }
