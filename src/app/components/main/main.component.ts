@@ -96,30 +96,36 @@ export class MainComponent {
     {
       if(r.report == 0)
       {
-        this.dataEntry = [];
         this.dataUser = r.data;
         // TODO: Remove this request
-        this.api.getEntries(this.userToken.toString()).subscribe(r => 
+      //   this.api.getEntries(this.userToken.toString()).subscribe(r => 
+      //   {
+      //     if(r.report === 0)
+      //     {
+      //       r.data.content.forEach(e => 
+      //       {
+      //         this.dataEntry.push(e);
+      //       });
+      //     }
+      //     else
+      //     {
+      //       console.log("Error: " + r.report + "(" + r.message + ")" );
+      //     }
+      //     this.isLoading = false;s
+      //   })
+        this.dataEntry.forEach((e, index) => 
         {
-          if(r.report === 0)
-          {
-            r.data.content.forEach(e => 
-            {
-              this.dataEntry.push(e);
-            });
-          }
-          else
-          {
-            console.log("Error: " + r.report + "(" + r.message + ")" );
-          }
-          this.isLoading = false;
-        })
+          if(e.id == id)
+            this.dataEntry.splice(index, 1);
+            this.isLoading = false;
+            return;
+        });
       }
       else
       {
         this.isLoading = false;
         console.log("Error: " + r.report + "(" + r.message + ")" );
       }
-    })
+    });
   }
 }
