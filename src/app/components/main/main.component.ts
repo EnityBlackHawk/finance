@@ -62,10 +62,6 @@ export class MainComponent {
 
   ngOnInit()
   {
-
-
-    
-
   }
 
   public ShowNew(): void
@@ -106,6 +102,7 @@ export class MainComponent {
         {
           if(r.report === 0)
           {
+            // TODO: Remove this request
             r.data.content.forEach(e => 
             {
               this.dataEntry.push(e);

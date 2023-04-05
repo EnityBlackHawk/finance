@@ -16,6 +16,7 @@ export class LoginComponent {
   badCredentials : boolean = false;
   apiStatus !: String;
   isLoading: boolean = false;
+  version: String;
 
   constructor(private router: Router, private api: ApiService, private loginService: LoginServiceService)
   {
@@ -24,22 +25,33 @@ export class LoginComponent {
         username: new FormControl(''),
         password: new FormControl(''),
       });
+    this.version = environment.version;
   }
 
 
   ngOnInit()
   {
     console.log("IsProduction: ", environment.production);
-    this.api.getStatus().subscribe(r =>
+
+    this.api.getStatus().subscribe(
       {
-        this.apiStatus = r.report ? r.data : r.message;
-      })
+        next: (r) => 
+        {
+          this.apiStatus = r.report ? r.data : r.message;
+        },
+        error: (e) =>
+        {
+          console.log(e);
+          this.apiStatus = "Failed (" + e.statusText + ")";
+        }
+      }
+    )
   }
 
   public OnSubmit(): void
   {
     this.isLoading = true;
-    this.api.autenticate(this.loginForm.value).subscribe(o => 
+    this.api.autenticate(this.loginForm.value).subscribe((o) => 
       {
         if(o.report === 0)
         {

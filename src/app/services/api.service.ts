@@ -23,7 +23,6 @@ export class ApiService {
   { 
     this.http = http;
     console.log("IsProduction: ", environment.production);
-    console.log(this.apiURL);
   }
 
   getStatus(): Observable<Response<String>>
