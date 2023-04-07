@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from 'src/app/services/api.service';
 import { LoginServiceService } from 'src/app/services/login-service.service';
 import { environment } from 'src/environments/environment';
@@ -18,7 +19,11 @@ export class LoginComponent {
   isLoading: boolean = false;
   version: String;
 
-  constructor(private router: Router, private api: ApiService, private loginService: LoginServiceService)
+  constructor(
+    private router: Router, 
+    private api: ApiService, 
+    private loginService: LoginServiceService
+    )
   {
     this.loginForm = new FormGroup(
       {
@@ -31,8 +36,6 @@ export class LoginComponent {
 
   ngOnInit()
   {
-    console.log("IsProduction: ", environment.production);
-
     this.api.getStatus().subscribe(
       {
         next: (r) => 

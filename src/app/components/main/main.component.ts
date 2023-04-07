@@ -2,11 +2,8 @@ import { Component } from '@angular/core';
 import { User } from 'src/app/Models/User';
 import { ApiService } from 'src/app/services/api.service';
 import { Entry } from 'src/app/Models/Entry';
-import { Observable } from 'rxjs';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { LoginServiceService } from 'src/app/services/login-service.service';
-import { formatDate } from '@angular/common';
-import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'app-main',
@@ -22,42 +19,52 @@ export class MainComponent {
 
   constructor(private api: ApiService, private router: Router, private loginService: LoginServiceService)
   {
-    this.userToken = this.loginService.userId;
-
-
-    if(this.userToken !== null && this.userToken !== undefined)
+    if(this.loginService.userId === null || this.loginService.userId === undefined)
     {
-      this.api.getEntries(this.userToken).subscribe(p =>
-      {
-        p.data.content.forEach(e =>
-          {
-            this.dataEntry.push(e);
-            
-          });
-          this.isLoading = false;
-      });
-      
-      if(this.dataEntry[0] !== undefined && this.dataEntry[0] !== null)
-      {
-        this.dataUser = this.dataEntry[0].user;
-      }
-      else
-      {
-        this.api.getUser(this.userToken.toString()).subscribe(p =>
-          {
-            p.data.content.forEach(e =>
-              {
-                this.dataUser = e;
-              });
-          });
-      }
-
+      let savedToken = localStorage.getItem("main.userToken");
+      this.userToken = savedToken !== null ? savedToken : "";
     }
-
     else
     {
-      this.router.navigate([""]);
+      this.userToken = this.loginService.userId;
+      localStorage.setItem("main.userToken", this.userToken.toString());
     }
+
+    this.api.getEntries(this.userToken).subscribe(
+      {
+        next: (r) => {
+          if(r.report == 0)
+          {
+            r.data.content.forEach(e =>
+            {
+              this.dataEntry.push(e);
+            });
+            this.isLoading = false;
+          }
+          else if(r.report == 1)
+          {
+            console.log("Token invalido");
+          }
+        },
+      }
+    )
+    
+    if(this.dataEntry[0] !== undefined && this.dataEntry[0] !== null)
+    {
+      this.dataUser = this.dataEntry[0].user;
+    }
+    else
+    {
+      this.api.getUser(this.userToken.toString()).subscribe(p =>
+        {
+          p.data.content.forEach(e =>
+            {
+              this.dataUser = e;
+            });
+        });
+    }
+
+    
   }
 
   ngOnInit()

@@ -61,4 +61,9 @@ export class ApiService {
     let r = new Response<String>(entryId, 0, "");
     return this.http.post<Response<User>>(this.apiURL + "/entry/remove/" + userToken, r);
   }
+
+  checkToken(token: String): Observable<Response<void>>
+  {
+    return this.http.get<Response<void>>(this.apiURL + "/users/checkToken/" + token);
+  }
 }

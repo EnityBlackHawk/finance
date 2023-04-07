@@ -11,7 +11,8 @@ import { NewEntryComponent } from './components/new-entry/new-entry.component';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 
 import { registerLocaleData } from '@angular/common';
-import localePTBR from '@angular/common/locales/pt'
+import localePTBR from '@angular/common/locales/pt';
+import { CookieService } from 'ngx-cookie-service';
 
 registerLocaleData(localePTBR);
 
@@ -31,6 +32,7 @@ registerLocaleData(localePTBR);
   providers: [
     CurrencyPipe,
     DatePipe,
+    CookieService,
     {provide: LOCALE_ID, useValue: 'pt-BR'}
   ],
   bootstrap: [AppComponent]
