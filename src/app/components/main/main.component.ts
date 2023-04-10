@@ -5,16 +5,41 @@ import { Entry } from 'src/app/Models/Entry';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { LoginServiceService } from 'src/app/services/login-service.service';
 
+import { trigger, state, style, animate, transition} from '@angular/animations';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css', './main.component.media.css']
+  styleUrls: ['./main.component.css', './main.component.media.css'],
+  animations: [
+    trigger('formAni', [
+      // state('true', style({
+      //   opacity: 1
+      // })),
+      // state('false', style({
+      //   opacity: 0
+      // })),
+      // transition('* => *', animate('1000ms ease-in-out'))
+
+      transition(':enter', [
+        style({opacity: 0}),
+        animate('250ms ease-in',
+                      style({opacity: 1}))
+      ]),
+      transition(':leave', [
+        style({opacity: 1}),
+        animate('250ms ease-out', style({opacity: 0}))
+      ])
+
+    ])
+  ]
 })
 export class MainComponent {
   userToken !: String;
   dataEntry: Entry[] = [];
   dataUser !: User;
   formShow: boolean = false;
+  formShowAn: boolean = false;
   isLoading: boolean = true;
 
   constructor(private api: ApiService, private router: Router, private loginService: LoginServiceService)
@@ -135,4 +160,15 @@ export class MainComponent {
       }
     });
   }
+
+  aniFormStart()
+  {
+
+  }
+
+  aniFormDone()
+  {
+
+  }
+
 }

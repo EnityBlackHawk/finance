@@ -1,5 +1,5 @@
 header{
-    background-color: #339497;
+    background: rgba(0, 0, 0, 0.250);
     display: grid;
     grid-template-columns: 1fr auto;
     padding: 0  10px;
@@ -27,6 +27,17 @@ header h2 {
     justify-content: center;
 }
 
+img
+{
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+}
+
 .counteiner{
     margin: 10px 0 0 0;
     width: 70%;
@@ -41,9 +52,8 @@ table {
 th {
     padding: 10px 0;
     text-align: left;
-    background-color: #339497;
+    background-color: #256b6e;
 }
-
 
 
 .removeRow
@@ -54,8 +64,12 @@ th {
 
 
 td, th {
-    border: 1px solid #ddd;
     padding: 8px;
+}
+
+td
+{
+    background-color: rgba(0, 0, 0, 0.250);
 }
 
 .divForm

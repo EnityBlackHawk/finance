@@ -13,6 +13,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localePTBR from '@angular/common/locales/pt';
 import { CookieService } from 'ngx-cookie-service';
+import { BrowserAnimationsModule} from '@Angular/platform-browser/animations'
 
 registerLocaleData(localePTBR);
 
@@ -27,7 +28,8 @@ registerLocaleData(localePTBR);
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     CurrencyPipe,

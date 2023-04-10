@@ -4,6 +4,7 @@
     <h2>Saldo: {{ dataUser?.value | currency: "BRL" }}</h2>
 </header>
 <div class="root">
+    <img src="../../../assets/forest_fog.jpg">
     <h1 *ngIf="isLoading">Carregando... </h1>
     <div *ngIf="!isLoading" class="counteiner">
         <table>
@@ -19,7 +20,7 @@
                 <td>{{ i.description }}</td>
                 <td>{{ i.credit ? 'Entrada' : 'Saida'}}</td>
                 <td>
-                    <p [ngStyle]="{'color': i.credit ? 'black' : 'red'}">
+                    <p [ngStyle]="{'color': i.credit ? 'black' : '#BF0000'}">
                         {{ i.value | currency: "R$" }}
                     </p>
                 </td>
@@ -34,7 +35,8 @@
             +
         </label>
     </button>
-    <div class="divForm" *ngIf="formShow">
+    <div [@formAni]
+        class="divForm" *ngIf="formShow">
         <app-new-entry (eventEmmiter)="EventReceved($event)"></app-new-entry>
     </div>
 </div>
